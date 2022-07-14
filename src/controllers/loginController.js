@@ -13,13 +13,13 @@ const loginToken = async (req, res) => {
     return res.status(findLogin.code).json(findLogin.message);
   }
 
-  const tokenAuth = await loginService.tokenAuth(findLogin);
+  const token = loginService.tokenAuth(findLogin);
 
-  if (tokenAuth.code) {
-    return res.status(tokenAuth.code).json(tokenAuth.message);
+  if (token.code) {
+    return res.status(token.code).json(token.message);
   }
-
-  return res.status(200).json(tokenAuth);
+  // console.log(tokenAuth);
+  return res.status(200).json({ token });
 };
 
 module.exports = {

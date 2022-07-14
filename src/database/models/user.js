@@ -7,8 +7,10 @@ const schemaUser = (sequelize, DataTypes) => {
     displayName: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    image: DataTypes.STRING,
-    timestamp: false
+    image: DataTypes.STRING
+  },
+  {
+    timestamps: false
   });
 
   return tableUser;
