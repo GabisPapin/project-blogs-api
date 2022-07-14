@@ -62,9 +62,15 @@ const tokenAuth = (payload) => {
   return value;
 };
 
+const getAll = () => {
+  const user = models.User.findAll({ attributes: { exclude: ['password'] } });
+  return user;
+};
+
 module.exports = {
   userAuth,
   createUser,
   findUser,
   tokenAuth,
+  getAll,
 };
