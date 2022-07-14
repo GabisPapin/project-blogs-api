@@ -12,22 +12,12 @@ const loginAuth = (payload) => {
 
   const { error, value } = auth;
 
-  // try {
-  //   const value = await schema.validateAsync(payload);
-  //   return value;
-  // } catch (error) {
-  //   console.log(error);
-  //   return { code: 400, message: { message: 'Some required fields are missing' } };
-  // }
-
   if (error) {
     return { code: 400, message: { message: 'Some required fields are missing' } };
   }
 
   return value;
 };
-
-// console.log(loginAuth({ email: 'gabis@gmail.com', password: '123456' }));
 
 const findLogin = async ({
   email,
@@ -54,13 +44,13 @@ const tokenAuth = (payload) => {
 
   const authToken = schema.validate(token);
 
-  const { error } = authToken;
+  const { error, value } = authToken;
 
   if (error) {
     return { code: 401, message: 'Token is required' };
   }
 
-  return token;
+  return value;
 };
 
 module.exports = {

@@ -18,7 +18,7 @@ const loginToken = async (req, res) => {
   if (token.code) {
     return res.status(token.code).json(token.message);
   }
-  // console.log(tokenAuth);
+
   return res.status(200).json({ token });
 };
 
