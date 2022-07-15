@@ -7,6 +7,9 @@ const schemaCategories = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING
     },
+  }, 
+  {
+    timestamps: false
   });
 
   return tableCategories;

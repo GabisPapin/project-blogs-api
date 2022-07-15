@@ -8,15 +8,15 @@ const categoryValid = (payload) => {
 
   const valid = schema.validate(payload);
 
-  const { value } = valid;
+  const { error, value } = valid;
 
-  // if (error) return { code: 400, message: { message: '"name" is required' } };
+  if (error) return { code: 400, message: { message: '"name" is required' } };
 
   return value;
 };
 
 const createCategory = async ({ name }) => {
-  const category = await models.User.create({ name });
+  const category = await models.Category.create({ name });
 
   return category;
 };
