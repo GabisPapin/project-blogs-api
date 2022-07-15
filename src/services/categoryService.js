@@ -21,7 +21,13 @@ const createCategory = async ({ name }) => {
   return category;
 };
 
+const getAll = () => {
+  const getCategory = models.Category.findAll();
+  return getCategory;
+};
+
 module.exports = {
   createCategory,
   categoryValid,
+  getAll,
 };
