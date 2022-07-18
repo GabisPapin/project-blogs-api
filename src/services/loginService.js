@@ -49,7 +49,7 @@ const tokenAuth = (payload) => {
   if (error) {
     return { code: 401, message: 'Token is required' };
   }
-  console.log(value);
+
   return value;
 };
 

@@ -39,8 +39,32 @@ const createPost = async (user, result) => {
 
   await models.PostCategory.bulkCreate(allPosts);
 
-  console.log(newPost);
   return newPost;
+};
+
+const updatePost = async (id, user, payload) => {
+  const { title, content } = payload;
+  const schema = joi.object({
+    title: joi.string().required(),
+    content: joi.string().required(),
+  });
+
+  const auth = schema.validate(payload);
+
+  if (auth.error) return { code: 400, message: { message: 'Some required fields are missing' } };
+
+  const findId = await models.BlogPost.findOne({ where: { id }, raw: true });
+  if (findId.userId !== user) return { code: 401, message: { message: 'Unauthorized user' } }; 
+
+  const [updated] = await models.BlogPost.update({ 
+    title, 
+    content,
+   },
+   {
+    where: { id: Number(id) },
+   });
+
+   return updated;
 };
 
 const getAll = async () => {
@@ -70,6 +94,7 @@ const getById = async (id) => {
 module.exports = {
   postAuth,
   createPost,
+  updatePost,
   getAll,
   getById,
 };
