@@ -2,7 +2,8 @@ const schemaCategories = (sequelize, DataTypes) => {
   const tableCategories = sequelize.define('Category', {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING

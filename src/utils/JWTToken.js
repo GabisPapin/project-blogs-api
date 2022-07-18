@@ -6,7 +6,7 @@ const jwtConfig = {
 };
 
 const generateJWTToken = (payload) => 
-  jwt.sign(payload, SECRET, jwtConfig);
+  jwt.sign({ data: payload }, SECRET, jwtConfig);
 
 module.exports = {
   generateJWTToken,
