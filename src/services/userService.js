@@ -75,6 +75,13 @@ const getById = async (id) => {
   return user;
 };
 
+const removeUser = async (id) => {
+  const removed = await models.User.findByPk(id, 
+    { raw: true, attributes: { exclude: ['password'] },
+  });
+  return removed;
+};
+
 module.exports = {
   userAuth,
   createUser,
@@ -82,4 +89,5 @@ module.exports = {
   tokenAuth,
   getAll,
   getById,
+  removeUser,
 };

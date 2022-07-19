@@ -10,4 +10,6 @@ userRouter.get('/:id', verifyToken, userController.getById);
 
 userRouter.get('/', verifyToken, userController.getAll);
 
+userRouter.delete('/:me', verifyToken, userController.removeUser);
+
 module.exports = userRouter;
