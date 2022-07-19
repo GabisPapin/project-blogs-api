@@ -91,10 +91,26 @@ const getById = async (id) => {
   return postId;
 };
 
+const removePost = async (id, user) => {
+  const findId = await models.BlogPost.findOne({ where: { id }, raw: true });
+
+  if (!findId) return { code: 404, message: { message: 'Post does not exist' } };
+
+  if (findId.userId !== user) return { code: 401, message: { message: 'Unauthorized user' } };
+
+  const removed = await models.BlogPost.destroy({ 
+    where: { id: findId.id },
+    raw: true,
+  });
+ 
+  return removed;
+};
+
 module.exports = {
   postAuth,
   createPost,
   updatePost,
   getAll,
   getById,
+  removePost,
 };

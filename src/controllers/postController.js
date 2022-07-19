@@ -40,9 +40,23 @@ const getById = async (req, res) => {
   return res.status(200).json(postId);
 };
 
+const removePost = async (req, res) => {
+  const { id } = req.params;
+  const { data } = req.user;
+
+  const removed = await postService.removePost(id, data.id);
+
+  if (removed.code) {
+    return res.status(removed.code).json(removed.message);
+  }
+
+  return res.status(204).end();
+};
+
 module.exports = {
   createPost,
   getAll,
   updatePost,
   getById,
+  removePost,
 };
