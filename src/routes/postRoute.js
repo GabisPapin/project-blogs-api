@@ -6,6 +6,8 @@ const postRouter = express.Router();
 
 postRouter.post('/', verifyToken, postController.createPost);
 
+postRouter.get('/search', verifyToken, postController.postSearch);
+
 postRouter.put('/:id', verifyToken, postController.updatePost);
 
 postRouter.get('/:id', verifyToken, postController.getById);

@@ -1,5 +1,6 @@
 // model - blogPost.js
 const joi = require('joi');
+const { Op } = require('sequelize');
 const models = require('../database/models');
 
 const postAuth = (payload) => {
@@ -106,6 +107,21 @@ const removePost = async (id, user) => {
   return removed;
 };
 
+const postSearch = async (query) => {
+  const search = await models.BlogPost.findAll({
+    include: [
+    { model: models.User, as: 'user', attributes: { exclude: ['password'] } },
+    { model: models.Category, as: 'categories', through: { attributes: [] } },
+  ], 
+  where: { [Op.or]: [
+    { title: { [Op.substring]: query } },
+    { content: { [Op.substring]: query } },
+] },
+  });
+
+  return search;
+};
+
 module.exports = {
   postAuth,
   createPost,
@@ -113,4 +129,5 @@ module.exports = {
   getAll,
   getById,
   removePost,
+  postSearch,
 };
